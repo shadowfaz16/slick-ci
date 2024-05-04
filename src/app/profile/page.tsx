@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import NavBar from "../_components/navbar";
 import { useActiveAccount } from "thirdweb/react";
@@ -74,8 +74,9 @@ const Table = () => {
 
 
 const Profile = () => {
+  const [email, setEmail] = useState('');
   const account = useActiveAccount();
-  var overlayInstance = new GateFiSDK({
+  const overlayInstance = new GateFiSDK({
     merchantId: "be07174d-8428-4227-be47-52391c7eafc1",
     displayMode: "overlay" as GateFiDisplayModeEnum,
     nodeSelector: "#overlay-button",
@@ -86,7 +87,17 @@ const Profile = () => {
     overlayInstance.show();
   };
 
-  const email = getUserEmail({ client });
+  useEffect(() => {
+    const fetchEmail = async () => {
+        const userEmail = await getUserEmail({ client });
+        setEmail(userEmail as string);
+        console.log("user email", userEmail);
+    };
+
+    fetchEmail();
+}, [client]);  // Dependency array to control the effect's re-execution
+
+
   console.log("user email", email);
 
   const SLICK_CONTRACT = getContract({

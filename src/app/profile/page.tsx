@@ -70,21 +70,28 @@ const Table = () => {
 
 
 const Profile = () => {
-  // const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(true);
   const account = useActiveAccount();
-  
-  // useEffect(() => {
-  //   const fetchEmail = async () => {
-  //     const userEmail = await getUserEmail({ client });
-  //     setEmail(userEmail!);
-  //     console.log("user email", userEmail);
-  //   };
-    
-  //   void fetchEmail();
-  // }, [client]);  // Dependency array to control the effect's re-execution
-  
-  // console.log("user email", email);
   const [overlayInstance, setOverlayInstance] = useState<GateFiSDK | null>(null);
+
+  useEffect(() => {
+    const fetchEmail = async () => {
+        try {
+            setLoading(true); // Set loading to true while fetching
+            const userEmail = await getUserEmail({ client });
+            setEmail(userEmail!);
+            console.log("user email", userEmail);
+        } catch (error) {
+            console.error("Failed to fetch email", error);
+            setEmail(null!); // Ensure it's set to null if an error occurs
+        } finally {
+            setLoading(false); // Ensure loading is set to false after fetching
+        }
+    };
+
+    void fetchEmail();
+}, [client]);
 
   useEffect(() => {
     const instance = new GateFiSDK({

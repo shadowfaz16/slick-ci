@@ -9,9 +9,10 @@
     "lint": "next lint",
     "start": "next start",
     "build-server": "tsc",
-    "dev-server": "tsx watch src/slickci-runner",
-    "dev-client": "wait-port 3000 && tsx watch src/slickci-scheduler",
-    "dev:trpc": "run-p dev-* --print-label"
+    "start-dev-server": "tsx watch src/slickci-runner",
+    "start-dev-client": "wait-port 3000 && tsx watch src/slickci-scheduler",
+    "start-client": "tsx watch src/slickci-scheduler",
+    "start:trpc": "run-p start-dev* --print-label"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.10.1",

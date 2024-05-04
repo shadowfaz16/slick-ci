@@ -31,16 +31,17 @@ function executeCommand(command: string): Promise<string> {
 export const runner = {
     run: async (workflow: Workflow) => {
         const commands = workflow.commands
-        console.log("Requested CPU: ", workflow.cpu)
-        console.log("Requested Memory: ", workflow.memory)
+        console.log('[######## START OF WORKFLOW ########]\n')
+        console.log("Requested CPU: " + workflow.cpu)
+        console.log("Requested Memory: " + workflow.memory + "\n")
         for (let command of commands) {
-            console.log("Running command now:", command);
+            console.log("Executing: [" + command + "]");
             await executeCommand(command)
-                .then(output => console.log('-----Command output-----\n', output))
-                .catch(err => console.error('-----Command failed-----\n', err));
+                .then(output => console.log('Output: [' + output.trim() + ']\n'))
+                .catch(err => console.error('Error: [' + err.trim() + ']\n'));
         }
         workflows.push(workflow)
-        console.log('-----END OF WORKFLOW-----')
+        console.log('[######## END OF WORKFLOW ########]\n\n')
         return { succeeded: true }
     }
 }

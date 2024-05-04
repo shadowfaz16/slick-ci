@@ -11,7 +11,8 @@ import type { AppRouter } from 'src/slickci-runner';
 const trpc = createTRPCClient<AppRouter>({
     links: [
         httpBatchLink({
-            url: 'http://localhost:3000',
+            // url: 'http://localhost:3000',
+            url: 'http://162.230.144.170:3000',
         }),
     ],
 });
@@ -24,7 +25,7 @@ const trpc = createTRPCClient<AppRouter>({
 // - Rename any variable and see it reflected across both frontend and backend
 
 const result = await trpc.scheduler.createWorkflow.mutate({
-    commands: ["echo hello", "bash --version"],
+    commands: ["echo hello", "npm --version"],
     cpu: "0.5",
     memory: "512Mi"
 });

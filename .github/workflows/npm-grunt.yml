@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-default
+    runs-on: slickci-runner-01
 
     steps:
     - uses: actions/checkout@v4

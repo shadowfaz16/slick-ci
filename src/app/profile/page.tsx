@@ -95,6 +95,12 @@ const Profile = () => {
     }
   )
 
+  const formatBalance = (balance: bigint) => {
+    if (!balance) return 'Loading...';
+    const tokens = balance / BigInt(1e18) / BigInt(1e18); // Adjust the division based on the token's decimals
+    return tokens.toString(); // Return the balance as a string
+  }
+
   console.log("slickTokenBalance:", slickTokenBalance)
 
   return (
@@ -143,7 +149,7 @@ const Profile = () => {
             </div>
             <div>
             <h3 className="text-lg text-text-100">
-                {slickTokenBalance ? (slickTokenBalance / BigInt(1e18)).toString() : 'Loading...'}
+                {slickTokenBalanceLoading ? 'Loading...' : slickTokenBalance}
               </h3>
             </div>
             </div>

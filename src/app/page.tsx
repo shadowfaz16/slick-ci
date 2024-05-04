@@ -35,7 +35,6 @@ export default async function Home() {
         client={client}
         chain={chain}
         /> */}
-        <Connect />
         </div>
         {/* <CrudShowcase /> */}
       </div>

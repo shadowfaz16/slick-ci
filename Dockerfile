@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:22-alpine
+FROM sitespeedio/node:ubuntu-22-04-nodejs-20.11.1
 
 # Set the working directory in the container
 WORKDIR /usr/src/app

@@ -2,29 +2,29 @@
 version: "2.0"
 
 endpoints:
-  myendpoint:
+  slickci-runner:
     kind: ip
 
 services:
   service-1:
-    image: slickci/slickci-runner:1.0.0
+    image: slickci/slickci-runner:1.0.1
     expose:
       - port: 3000
         as: 3000
         to:
           - global: true
-            ip: "myendpoint"
+            ip: "slickci-runner"
 
 profiles:
   compute:
     service-1:
       resources:
         cpu:
-          units: 0.5
+          units: 4
         memory:
-          size: 512Mi
+          size: 6000Mi
         storage:
-          - size: 100Mi
+          - size: 4096Mi
   placement:
     dcloud:
       pricing:

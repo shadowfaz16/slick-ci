@@ -28,7 +28,7 @@ const NavBar = () => {
       </div>
       <div className="flex items-center gap-4">
         <Connect />
-        <Link href='https://github.com/apps/slickci/installations/select_target' className="flex items-center justify-center gap-2 rounded-lg bg-primary-100 p-3 hover:bg-bg-300">
+        <Link href='https://github.com/apps/slickci/installations/select_target' target="_blank" className="flex items-center justify-center gap-2 rounded-lg bg-primary-100 p-3 hover:bg-bg-300">
           <FaGithub className="inline" size={16} color="white" />
           <p className="rounded-md text-xs text-text-100">
             Connect Github Repo

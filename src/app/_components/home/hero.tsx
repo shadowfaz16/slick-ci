@@ -33,7 +33,7 @@ const Hero = () => {
           </p>
           <div className="space-y-3">
             <div className="flex items-center space-x-2">
-            <Link href='https://github.com/apps/slickci/installations/select_target'  className="rounded-lg bg-primary-100 flex items-center justify-center p-3 gap-2 hover:bg-bg-300">
+            <Link href='https://github.com/apps/slickci/installations/select_target' target="_blank" className="rounded-lg bg-primary-100 flex items-center justify-center p-3 gap-2 hover:bg-bg-300">
                   <FaGithub className="inline" size={16} color="white" />
                 <p className="rounded-md text-xs text-text-100">
                   Get Started for Free

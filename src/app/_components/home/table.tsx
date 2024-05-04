@@ -29,7 +29,7 @@ const PricingTable = () => {
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 {/* Price (ARM) */}
-                                <Image src={github} alt="github" width={100} height={100} />
+                                <Image src={github as string} alt="github" width={100} height={100} />
                             </th>
                         </tr>
                     </thead>
@@ -38,7 +38,7 @@ const PricingTable = () => {
                             <tr key={index}>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="flex items-center">
-                                        {Array.from({ length: item.cpus }, (_, i) => <FiCpu className="text-gray-500" />)}
+                                        {Array.from({ length: item.cpus }, (_, idx) => <FiCpu key={idx} className="text-gray-500" />)}
                                         <span className="ml-4">
                                             {item.cpus} vCPU
                                         </span>

@@ -21,9 +21,9 @@ const NavBar = () => {
         </div>
         <ul className="flex items-center gap-8 text-sm text-text-200">
           <li>Home</li>
-          <li>About</li>
-          <li>Services</li>
-          <li>Contact</li>
+          <Link href='/profile'>Profile</Link>
+          {/* <li>Services</li>
+          <li>Contact</li> */}
         </ul>
       </div>
       <div className="flex items-center gap-4">

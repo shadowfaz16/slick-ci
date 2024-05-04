@@ -10,6 +10,7 @@ import {GateFiSDK, GateFiDisplayModeEnum} from '@gatefi/js-sdk';
 import {useReadContract} from 'thirdweb/react'
 import {balanceOf} from 'thirdweb/extensions/erc20'
 import {getContract} from 'thirdweb'
+import {toEther} from 'thirdweb/utils'
 
 // var overlayInstance = new GateFiSDK({
 //   merchantId: "testID",
@@ -101,6 +102,15 @@ const Profile = () => {
     return tokens.toString(); // Return the balance as a string
   }
 
+  function truncate(value: string | number, decimalPlaces: number): number {
+    const numbericValue: number = Number(value);
+    if (isNaN(numbericValue)) {
+      throw new Error('Value is not a number');
+    }
+    const factor: number = Math.pow(10, decimalPlaces);
+    return Math.trunc(numbericValue * factor) / factor;
+  }
+
   console.log("slickTokenBalance:", slickTokenBalance)
 
   return (
@@ -138,21 +148,23 @@ const Profile = () => {
               </button>
             </div>
           </div>
-          <div className="flex items-center justify-between pt-6">
-            <div className="flex gap-2">
+          {/* <div className="flex items-center justify-between pt-6"> */}
+            {/* <div className="flex gap-2">
               <div>
                 <h3 className="text-lg text-text-100">Account Balance</h3>
                 <p className="text-sm text-text-200">
                   Your current balance in your account
                 </p>
-              </div>
-            </div>
-            <div>
             <h3 className="text-lg text-text-100">
-                {slickTokenBalanceLoading ? 'Loading...' : slickTokenBalance}
+                {
+                  slickTokenBalanceLoading ? 'Loading...' : 
+                  slickTokenBalance ?
+                 formatBalance(slickTokenBalance) : 0
+                }
               </h3>
-            </div>
-            </div>
+              </div>
+            </div> */}
+            {/* </div> */}
           <div className="py-6">
             <h4 className="text-xl text-text-100">Resource Limits</h4>
             <p className="text-sm text-text-200">

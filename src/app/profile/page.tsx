@@ -10,11 +10,7 @@ import {GateFiSDK, GateFiDisplayModeEnum} from '@gatefi/js-sdk';
 import {useReadContract} from 'thirdweb/react'
 import {balanceOf} from 'thirdweb/extensions/erc20'
 import {getContract} from 'thirdweb'
-import {toEther} from 'thirdweb/utils'
-import {useConnectedWallets, useActiveWallet} from 'thirdweb/react'
 import { getUserEmail } from "thirdweb/wallets/in-app";
-
-
 
 
 const Table = () => {
@@ -74,31 +70,34 @@ const Table = () => {
 
 
 const Profile = () => {
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
   const account = useActiveAccount();
   
-  useEffect(() => {
-    const fetchEmail = async () => {
-      const userEmail = await getUserEmail({ client });
-      setEmail(userEmail!);
-      console.log("user email", userEmail);
-    };
+  // useEffect(() => {
+  //   const fetchEmail = async () => {
+  //     const userEmail = await getUserEmail({ client });
+  //     setEmail(userEmail!);
+  //     console.log("user email", userEmail);
+  //   };
     
-    void fetchEmail();
-  }, [client]);  // Dependency array to control the effect's re-execution
+  //   void fetchEmail();
+  // }, [client]);  // Dependency array to control the effect's re-execution
   
-  console.log("user email", email);
+  // console.log("user email", email);
+  const [overlayInstance, setOverlayInstance] = useState<GateFiSDK | null>(null);
 
-  const overlayInstance = new GateFiSDK({
-    merchantId: "be07174d-8428-4227-be47-52391c7eafc1",
-    displayMode: "overlay" as GateFiDisplayModeEnum,
-    nodeSelector: "#overlay-button",
-    walletAddress: account?.address,
-    email: email ? email : '',
-  })
-  overlayInstance.hide();
+  useEffect(() => {
+    const instance = new GateFiSDK({
+      merchantId: "be07174d-8428-4227-be47-52391c7eafc1",
+      displayMode: "overlay" as GateFiDisplayModeEnum,
+      nodeSelector: "#overlay-button",
+      walletAddress: account?.address,
+    });
+    setOverlayInstance(instance);
+    instance.hide(); // Uncomment if you need to initially hide the overlay
+  }, [account?.address]);
   const openOverlay = () => {
-    overlayInstance.show();
+    overlayInstance?.show();
   };
 
   const SLICK_CONTRACT = getContract({
@@ -117,12 +116,6 @@ const Profile = () => {
       },
     }
   )
-
-  const formatBalance = (balance: bigint) => {
-    if (!balance) return 'Loading...';
-    const tokens = balance / BigInt(1e18) / BigInt(1e18); // Adjust the division based on the token's decimals
-    return tokens.toString(); // Return the balance as a string
-  }
 
 
   console.log("slickTokenBalance:", slickTokenBalance)

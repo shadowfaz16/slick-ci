@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import heroImage from "~/assets/static/hero.svg";
+import heroImage from "~/assets/static/hero.png";
 import weset from "~/assets/logos/weset.webp";
 import pxm from "~/assets/logos/pxm.svg";
 import veme from "~/assets/logos/veme.svg";
@@ -50,7 +50,7 @@ const Hero = () => {
         </div>
         <div>
           <Image
-            src={heroImage as string}
+            src={heroImage}
             alt="github-actions"
             width={500}
             height={500}

@@ -14,6 +14,7 @@
     "dev:trpc": "run-p dev-* --print-label"
   },
   "dependencies": {
+    "@gatefi/js-sdk": "^0.18.0",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "^5.25.0",
     "@trpc/client": "next",

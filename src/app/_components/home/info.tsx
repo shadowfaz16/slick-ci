@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import heroImage from "~/assets/static/hero.svg";
+import heroImage from "~/assets/static/hero.png";
 import { AiOutlineDatabase } from "react-icons/ai";
 import { VscClearAll } from "react-icons/vsc";
 import { IoKeyOutline } from "react-icons/io5";
@@ -20,7 +20,7 @@ const Info = () => {
         </p>
       </div>
       <div className="flex items-center justify-around gap-48">
-        <Image src={heroImage as string} alt="hero" width={500} height={500} />
+        <Image src={heroImage} alt="hero" width={500} height={500} />
         <div className="space-y-4">
           <h3 className="text-3xl text-text-100">Incredibly easy to set up</h3>
           <p className="font-medium text-text-200">

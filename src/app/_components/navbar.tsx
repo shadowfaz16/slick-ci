@@ -6,7 +6,7 @@ import Connect from "./connect-button";
 
 const NavBar = () => {
   return (
-    <div className="container mx-auto flex w-full items-center justify-between py-4">
+    <div className="container mx-auto flex w-full items-center justify-between py-2">
       <div className="flex items-center space-x-12">
         <div className="flex space-x-2">
           <Link href='/' className="h-10 w-10 rounded-md bg-primary-100 flex items-center justify-center">

@@ -35,6 +35,7 @@ export default function Connect() {
             border: 'none',
         },
         className: 'text-xs p-0 m-0',
+        displayBalanceToken: '0x165D7c367f70eF96fe4B9b50140Ca456bbECD941'
       }}
 
        />

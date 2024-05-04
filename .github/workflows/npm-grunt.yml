@@ -1,0 +1,17 @@
+name: NodeJS with Grunt
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: slickci-runner-01
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build
+      run: echo "Hello Mentorsss"

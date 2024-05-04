@@ -8,7 +8,6 @@ import { client } from "./client";
 import { chain } from "./chain";
 
 import {ConnectEmbed} from 'thirdweb/react'
-import Connect from "./_components/connect-button";
 
 
 export default async function Home() {
@@ -31,12 +30,7 @@ export default async function Home() {
           <FaArrowAltCircleRight color="white" size={14} />
           </div>
         </Link>
-        {/* <ConnectEmbed
-        client={client}
-        chain={chain}
-        /> */}
         </div>
-        {/* <CrudShowcase /> */}
       </div>
     </main>
   );

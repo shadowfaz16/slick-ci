@@ -33,9 +33,9 @@ export default function RootLayout({
           <ThirdwebProvider>
           {children}
           </ThirdwebProvider>
-          {/* <div>
-            FOOTER
-          </div> */}
+          <div className="container">
+            
+          </div>
           </TRPCReactProvider>
       </body>
     </html>

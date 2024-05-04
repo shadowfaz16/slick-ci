@@ -6,13 +6,14 @@ import pxm from "~/assets/logos/pxm.svg";
 import veme from "~/assets/logos/veme.svg";
 import mygeotokens from "~/assets/logos/mygeotokens.gif";
 import gang from "~/assets/logos/gang.png";
+import { FaGithub } from "react-icons/fa";
 
 const Hero = () => {
   return (
     <>
-      <div className="container mx-auto flex items-center justify-between pb-20 pt-24">
+      <div className="container mx-auto flex items-center justify-between pb-24 pt-24">
         <div className="space-y-8">
-          <div className="flex items-center space-x-4 rounded bg-bg-300 p-1 md:w-3/5">
+          <div className="flex items-center space-x-4 rounded bg-bg-300 p-1 md:w-3/5 shadow shadow-primary-200">
             <div className="rounded bg-primary-200 px-3">
               <span className="text-xs text-text-100">WHAT'S NEW</span>
             </div>
@@ -25,14 +26,15 @@ const Hero = () => {
           </h1>
           <p className="text-lg text-text-100">
             Managed performance runners for Github Actions.
-            <span className="mt-2 block font-bold">
+            <span className="mt-2 block font-semibold">
               Change 1 line, get 2x faster and cheaper builds.
             </span>
           </p>
           <div className="space-y-3">
             <div className="flex items-center space-x-4">
-              <div className="rounded-lg bg-primary-100">
-                <p className="rounded-md p-3 text-sm text-text-100">
+              <div className="rounded-lg bg-primary-100 flex items-center justify-center p-3 gap-2">
+                  <FaGithub className="inline" size={16} color="white" />
+                <p className="rounded-md text-xs text-text-100">
                   Get Started for Free
                 </p>
               </div>

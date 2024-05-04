@@ -11,12 +11,11 @@ import {useReadContract} from 'thirdweb/react'
 import {balanceOf} from 'thirdweb/extensions/erc20'
 import {getContract} from 'thirdweb'
 import {toEther} from 'thirdweb/utils'
+import {useConnectedWallets, useActiveWallet} from 'thirdweb/react'
+import { getUserEmail } from "thirdweb/wallets/in-app";
 
-// var overlayInstance = new GateFiSDK({
-//   merchantId: "testID",
-//   displayMode: "overlay" as GateFiDisplayModeEnum,
-//   nodeSelector: "#overlay-button"
-// })
+
+
 
 const Table = () => {
   return (
@@ -73,11 +72,22 @@ const Table = () => {
   );
 };
 
+
 const Profile = () => {
   const account = useActiveAccount();
-  // const openOverlay = () => {
-  //   overlayInstance.show();
-  // };
+  var overlayInstance = new GateFiSDK({
+    merchantId: "be07174d-8428-4227-be47-52391c7eafc1",
+    displayMode: "overlay" as GateFiDisplayModeEnum,
+    nodeSelector: "#overlay-button",
+    walletAddress: account?.address,
+  })
+  overlayInstance.hide();
+  const openOverlay = () => {
+    overlayInstance.show();
+  };
+
+  const email = getUserEmail({ client });
+  console.log("user email", email);
 
   const SLICK_CONTRACT = getContract({
     address: '0x165D7c367f70eF96fe4B9b50140Ca456bbECD941',
@@ -119,11 +129,7 @@ const Profile = () => {
         <NavBar />
       </div>
       {account ? (
-        <div className="container mx-auto py-6">
-            {/* <button id="#overlay-button" onClick={openOverlay} className="rounded-md bg-bg-100 p-2 px-4 text-sm text-text-200 hover:bg-bg-200">
-            Open Overlay
-          </button> */}
-         
+        <div className="container mx-auto py-6">    
           <div className="flex items-center justify-between rounded-lg border border-primary-300 bg-primary-100 p-6">
             <div className="flex gap-2">
               <div>
@@ -143,7 +149,9 @@ const Profile = () => {
               </div>
             </div>
             <div>
-              <button className="rounded-md bg-bg-100 p-2 px-4 text-sm text-text-200 hover:bg-bg-200">
+              <button className="rounded-md bg-bg-100 p-2 px-4 text-sm text-text-200 hover:bg-bg-200"
+              id="overlay-button" onClick={() => openOverlay()} 
+              >
                 Add funds to your account
               </button>
             </div>

@@ -14,4 +14,4 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Build
-      run: echo "Hello World"
+      run: echo "Hello Mentors"

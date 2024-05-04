@@ -88,7 +88,7 @@ const Profile = () => {
     balanceOf,
     {
       contract: SLICK_CONTRACT,
-      address: account?.address || '',
+      address: account?.address ?? '',
       queryOptions: {
         enabled: !!account,
       },
@@ -142,8 +142,8 @@ const Profile = () => {
               </div>
             </div>
             <div>
-              <h3 className="text-lg text-text-100">
-                {slickTokenBalance ? slickTokenBalance : 'Loading...' }
+            <h3 className="text-lg text-text-100">
+                {slickTokenBalance ? (slickTokenBalance / BigInt(1e18)).toString() : 'Loading...'}
               </h3>
             </div>
             </div>

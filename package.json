@@ -7,7 +7,11 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "build-server": "tsc",
+    "dev-server": "tsx watch src/slickci-runner",
+    "dev-client": "wait-port 3000 && tsx watch src/slickci-scheduler",
+    "dev:trpc": "run-p dev-* --print-label"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.10.1",
@@ -16,11 +20,16 @@
     "@trpc/react-query": "next",
     "@trpc/server": "next",
     "next": "^14.2.1",
+    "npm-run-all": "^4.1.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^5.2.0",
     "server-only": "^0.0.1",
+    "start-server-and-test": "^2.0.3",
     "superjson": "^2.2.1",
+    "trpc": "^0.11.3",
+    "tsx": "^4.9.0",
+    "wait-port": "^1.1.0",
     "zod": "^3.23.3"
   },
   "devDependencies": {
@@ -36,7 +45,8 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   },
   "ct3aMetadata": {
     "initVersion": "7.32.0"

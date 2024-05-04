@@ -76,29 +76,30 @@ const Table = () => {
 const Profile = () => {
   const [email, setEmail] = useState('');
   const account = useActiveAccount();
+  
+  useEffect(() => {
+    const fetchEmail = async () => {
+      const userEmail = await getUserEmail({ client });
+      setEmail(userEmail!);
+      console.log("user email", userEmail);
+    };
+    
+    void fetchEmail();
+  }, [client]);  // Dependency array to control the effect's re-execution
+  
+  console.log("user email", email);
+
   const overlayInstance = new GateFiSDK({
     merchantId: "be07174d-8428-4227-be47-52391c7eafc1",
     displayMode: "overlay" as GateFiDisplayModeEnum,
     nodeSelector: "#overlay-button",
     walletAddress: account?.address,
+    email: email ? email : '',
   })
   overlayInstance.hide();
   const openOverlay = () => {
     overlayInstance.show();
   };
-
-  useEffect(() => {
-    const fetchEmail = async () => {
-        const userEmail = await getUserEmail({ client });
-        setEmail(userEmail!);
-        console.log("user email", userEmail);
-    };
-
-    void fetchEmail();
-}, [client]);  // Dependency array to control the effect's re-execution
-
-
-  console.log("user email", email);
 
   const SLICK_CONTRACT = getContract({
     address: '0x165D7c367f70eF96fe4B9b50140Ca456bbECD941',
@@ -123,14 +124,6 @@ const Profile = () => {
     return tokens.toString(); // Return the balance as a string
   }
 
-  function truncate(value: string | number, decimalPlaces: number): number {
-    const numbericValue: number = Number(value);
-    if (isNaN(numbericValue)) {
-      throw new Error('Value is not a number');
-    }
-    const factor: number = Math.pow(10, decimalPlaces);
-    return Math.trunc(numbericValue * factor) / factor;
-  }
 
   console.log("slickTokenBalance:", slickTokenBalance)
 

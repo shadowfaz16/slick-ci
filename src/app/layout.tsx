@@ -22,9 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable} min-h-screen flex flex-col justify-between bg-bg-100`}>
+      <body className={`font-sans ${inter.variable} min-h-screen flex flex-col justify-between bg-primary-200`}>
         <TRPCReactProvider>
-          <div className="bg-bg-100 p-2 border-b border-dashed border-bg-300">
+          <div className="bg-primary-200 p-2 border-b border-dashed border-bg-100">
             <div className="container mx-auto text-text-100">
             SlickCI
             </div>

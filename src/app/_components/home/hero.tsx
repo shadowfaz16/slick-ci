@@ -26,7 +26,7 @@ const Hero = () => {
             Make GitHub Actions Cheaper
           </h1>
           <p className="text-lg text-text-100">
-            Managed performance runners for Github Actions.
+          Easy deployment for CI workflows to decentralised cloud infrastructure
             <span className="mt-2 block font-semibold">
               Change 1 line, get 2x faster and cheaper builds.
             </span>

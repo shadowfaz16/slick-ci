@@ -90,11 +90,11 @@ const Profile = () => {
   useEffect(() => {
     const fetchEmail = async () => {
         const userEmail = await getUserEmail({ client });
-        setEmail(userEmail as string);
+        setEmail(userEmail!);
         console.log("user email", userEmail);
     };
 
-    fetchEmail();
+    void fetchEmail();
 }, [client]);  // Dependency array to control the effect's re-execution
 
 

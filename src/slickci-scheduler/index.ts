@@ -1,12 +1,14 @@
 /**
  * This is the client-side code that uses the inferred types from the slickci-runner
  */
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import {createTRPCClient, httpBatchLink} from '@trpc/client';
 /**
  * We only import the `AppRouter` type from the slickci-runner - this is not available at runtime
  */
-import type { AppRouter } from 'src/slickci-runner';
+import type {AppRouter} from 'src/slickci-runner';
 import jwt from 'jsonwebtoken';
+import express from 'express';
+import bodyParser from 'body-parser';
 import axios from 'axios';
 import * as fs from 'fs';
 
@@ -38,13 +40,15 @@ function generateJWT(appId: string, privateKeyPath: string): string {
     return jwt.sign(payload, privateKey, { algorithm: 'RS256' });
 }
 
-const appId = '891230';
-const privateKeyPath = './src/slickci-scheduler/slickci-app.private-key.pem';
+// const appId = '891230';
+// const privateKeyPath = './src/slickci-scheduler/slickci-app.private-key.pem';
+const appId = '890630';
+const privateKeyPath = './src/slickci-scheduler/slickci.private-key.pem';
 const token = generateJWT(appId, privateKeyPath);
 console.log(token);
 
-async function createRunnerToken(owner: string, repo: string, appToken: string): Promise<string> {
-    const url = `https://api.github.com/repos/${owner}/${repo}/actions/runners/registration-token`;
+async function createRunnerToken(owner: string, appToken: string): Promise<string> {
+    const url = `https://api.github.com/repos/${owner}/actions/runners/registration-token`;
     const headers = {
         Authorization: `Bearer ${appToken}`,
         Accept: 'application/vnd.github+json',
@@ -95,26 +99,74 @@ async function getInstallationToken(installationId: string, appToken: string): P
     }
 }
 
-const owner = 'PerkyPerry';
-const repo = 'test-slickci';
-const appToken = token;
-// getInstallationId(owner, repo, appToken)
-const installationToken = await getInstallationToken("50360392", appToken)
-const runnerToken = await createRunnerToken(owner, repo, installationToken)
+// TypeScript interface to define the structure of GitHub repository objects
+interface GitHubRepository {
+    full_name: string;
+}
 
-const result = await trpc.scheduler.createWorkflow.mutate({
-    commands: [
-        "mkdir actions-runner && cd actions-runner",
-        "apt-get update && apt-get install -y --no-install-recommends apt-utils && apt-get install -y curl",
-        "curl -o actions-runner-linux-x64-2.316.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.316.0/actions-runner-linux-x64-2.316.0.tar.gz",
-        "tar xzf ./actions-runner-linux-x64-2.316.0.tar.gz",
-        'export RUNNER_ALLOW_RUNASROOT="1"',
-        "./bin/installdependencies.sh",
-        `export RUNNER_ALLOW_RUNASROOT="1" && ./config.sh --url https://github.com/PerkyPerry/test-slickci --name slickci-runner-01 --labels slickci-runner-01 --token ${runnerToken} --unattended`,
-        'export RUNNER_ALLOW_RUNASROOT="1" && ./run.sh'
-    ],
-    cpu: "0.5",
-    memory: "512Mi"
+// TypeScript interface to define the structure of the payload for installation-related events
+interface GitHubInstallationEvent {
+    action: string;
+    installation: {
+        id: string,
+        account: {
+            login: string;
+        };
+    };
+    repositories: GitHubRepository[];
+    repositories_added?: GitHubRepository[];
+    repositories_removed?: GitHubRepository[];
+}
+
+const app = express();
+app.use(bodyParser.json());
+type Installation = {
+    id: string,
+    fullName: string
+}
+
+// Function to extract repository full names based on the event type
+const extractRepoFullNames = (payload: GitHubInstallationEvent): Installation => {
+    // @ts-ignore
+    return {
+        id: payload.installation.id,
+        fullName: payload.repositories ? payload.repositories[0].full_name : payload.repositories_added[0].full_name
+    };
+};
+
+// Route to handle incoming webhooks
+app.post('/webhooks', async (req, res) => {
+    const eventType = req.headers['x-github-event'] as string;
+    const payload = req.body as GitHubInstallationEvent;
+
+    if ((eventType === 'installation' || eventType === 'installation_repositories') && (payload.action === 'created' || payload.action === 'added')) {
+        const repoFullNames = extractRepoFullNames(payload);
+        console.log(`Repositories from event (${eventType}):`, repoFullNames);
+
+// getInstallationId(owner, repo, appToken)
+        const installationToken = await getInstallationToken(repoFullNames.id, token)
+        const runnerToken = await createRunnerToken(repoFullNames.fullName, installationToken)
+
+        const result = await trpc.scheduler.createWorkflow.mutate({
+            commands: [
+                "mkdir actions-runner && cd actions-runner",
+                "apt-get update && apt-get install -y --no-install-recommends apt-utils && apt-get install -y curl",
+                "curl -o actions-runner-linux-x64-2.316.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.316.0/actions-runner-linux-x64-2.316.0.tar.gz",
+                "tar xzf ./actions-runner-linux-x64-2.316.0.tar.gz",
+                'export RUNNER_ALLOW_RUNASROOT="1"',
+                "./bin/installdependencies.sh",
+                `export RUNNER_ALLOW_RUNASROOT="1" && ./config.sh --url https://github.com/${repoFullNames.fullName} --labels slickci-runner-01 --token ${runnerToken} --unattended`,
+                'export RUNNER_ALLOW_RUNASROOT="1" && ./run.sh'
+            ],
+            cpu: "0.5",
+            memory: "512Mi"
+        });
+
+        console.log('Workflow Result:', result);
+    }
+
+    res.status(200).send('Webhook received!');
 });
 
-console.log('Workflow Result:', result);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

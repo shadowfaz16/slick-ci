@@ -6,10 +6,10 @@ import slickci from '~/assets/logos/slick.png';
 
 const PricingTable = () => {
     const hardwareOptions = [
-        { cpus: 2, ram: "8 GB", priceAMD: "$0.004 / min", priceARM: "$0.008 / min" },
-        { cpus: 4, ram: "16 GB", priceAMD: "$0.008 / min", priceARM: "$0.016 / min" },
-        { cpus: 8, ram: "32 GB", priceAMD: "$0.016 / min", priceARM: "$0.032 / min" },
-        { cpus: 16, ram: "64 GB", priceAMD: "$0.032 / min", priceARM: "$0.064 / min" },
+        { cpus: 2, ram: "8 GB", priceAMD: "$0.002 / min", priceARM: "$0.008 / min" },
+        { cpus: 4, ram: "16 GB", priceAMD: "$0.004 / min", priceARM: "$0.016 / min" },
+        { cpus: 8, ram: "32 GB", priceAMD: "$0.008 / min", priceARM: "$0.032 / min" },
+        { cpus: 16, ram: "64 GB", priceAMD: "$0.016 / min", priceARM: "$0.064 / min" },
     ];
 
     return (

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 
@@ -23,12 +24,12 @@ const NavBar = () => {
       </div>
       <div className="flex items-center gap-4">
         <p className="text-text-200">Log in</p>
-        <div className="flex items-center justify-center gap-2 rounded-lg bg-primary-100 p-3">
+        <Link href='https://github.com/apps/slickci/installations/select_target' className="flex items-center justify-center gap-2 rounded-lg bg-primary-100 p-3">
           <FaGithub className="inline" size={16} color="white" />
           <p className="rounded-md text-xs text-text-100">
             Get Started for Free
           </p>
-        </div>
+        </Link>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ export default async function Home() {
         <h1 className="text-6xl font-medium text-text-100">
           SlickCI makes extremely fast and cheap CIs
         </h1>
-        <Link href='/for-github-actions' className="flex flex-col bg-primary-100 rounded-lg p-8 md:w-1/2 space-y-8 cursor-pointer hover:bg-bg-300">
+        <Link href='http://localhost:300/for-github-actions' className="flex flex-col bg-primary-100 rounded-lg p-8 md:w-1/2 space-y-8 cursor-pointer hover:bg-bg-300">
           <div className="space-y-2">
           <h3 className="text-text-100 text-lg font-semibold">For Github Actions</h3>
           <p className="text-text-200 text-sm">Deploy your CICD workflows on decentralized bare metal services with one click</p>

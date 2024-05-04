@@ -7,11 +7,12 @@ import veme from "~/assets/logos/veme.svg";
 import mygeotokens from "~/assets/logos/mygeotokens.gif";
 import gang from "~/assets/logos/gang.png";
 import { FaGithub } from "react-icons/fa";
+import Link from "next/link";
 
 const Hero = () => {
   return (
     <>
-      <div className="container mx-auto flex items-center justify-between pb-24 pt-24">
+      <div className="container mx-auto flex items-center justify-between pb-20 pt-24">
         <div className="space-y-8">
           <div className="flex items-center space-x-4 rounded bg-bg-300 p-1 md:w-3/5 shadow shadow-primary-200">
             <div className="rounded bg-primary-200 px-3">
@@ -32,12 +33,12 @@ const Hero = () => {
           </p>
           <div className="space-y-3">
             <div className="flex items-center space-x-4">
-              <div className="rounded-lg bg-primary-100 flex items-center justify-center p-3 gap-2">
+            <Link href='https://github.com/apps/slickci/installations/select_target'  className="rounded-lg bg-primary-100 flex items-center justify-center p-3 gap-2">
                   <FaGithub className="inline" size={16} color="white" />
                 <p className="rounded-md text-xs text-text-100">
                   Get Started for Free
                 </p>
-              </div>
+              </Link>
               <p className="rounded-md p-3 text-sm text-text-100">
                 Read the docs
               </p>

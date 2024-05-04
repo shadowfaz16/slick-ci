@@ -56,7 +56,7 @@ if repo_owner and repo_name and access_token:
             except yaml.YAMLError as e:
                 print(f"Error parsing YAML content: {e}")
 
-            if runs == 'ubuntu-latest':
+            if runs == 'slickci-runner-01':
                 print(f"Runs on header {runs}")
             else:
                 print(f"No 'runs-on' header found in {workflow_file['path']}")

@@ -33,3 +33,4 @@ const server = createHTTPServer({
 });
 
 server.listen(3000);
+console.log("Server started");

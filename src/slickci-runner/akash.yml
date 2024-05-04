@@ -1,0 +1,39 @@
+---
+version: "2.0"
+
+endpoints:
+  slickci-runner:
+    kind: ip
+
+services:
+  service-1:
+    image: slickci/slickci-runner:1.0.1
+    expose:
+      - port: 3000
+        as: 3000
+        to:
+          - global: true
+            ip: "slickci-runner"
+
+profiles:
+  compute:
+    service-1:
+      resources:
+        cpu:
+          units: 4
+        memory:
+          size: 6000Mi
+        storage:
+          - size: 4096Mi
+  placement:
+    dcloud:
+      pricing:
+        service-1:
+          denom: uakt
+          amount: 1000
+
+deployment:
+  service-1:
+    dcloud:
+      profile: service-1
+      count: 1

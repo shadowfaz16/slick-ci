@@ -27,6 +27,7 @@
     "server-only": "^0.0.1",
     "start-server-and-test": "^2.0.3",
     "superjson": "^2.2.1",
+    "thirdweb": "^5.16.0",
     "trpc": "^0.11.3",
     "tsx": "^4.9.0",
     "wait-port": "^1.1.0",

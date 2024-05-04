@@ -14,17 +14,17 @@ const Info = () => {
           Keep GitHub Actions, just not their runners
         </h1>
         <p className="mx-auto max-w-2xl text-lg text-text-200">
-          BuildJet for GitHub Actions gives you access to a secure and fast
+          SlickCI for GitHub Actions gives you access to a secure and fast
           runner fleet. Simply change 1 line in your configuration file and
-          you're ready to be more productive
+          you&apos;re ready to be more productive
         </p>
       </div>
       <div className="flex items-center justify-around gap-48">
-        <Image src={heroImage} alt="hero" width={500} height={500} />
+        <Image src={heroImage as string} alt="hero" width={500} height={500} />
         <div className="space-y-4">
           <h3 className="text-3xl text-text-100">Incredibly easy to set up</h3>
           <p className="font-medium text-text-200">
-            Installing SlickCI for GitHub Actions can't be easier. You simply
+            Installing SlickCI for GitHub Actions can&apos;t be easier. You simply
             sign in with your GitHub Account and authorize SlickCI to access
             your organization. Now you can add BuildJet for GitHub Actions where
             ever you see the runs-on property.

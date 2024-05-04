@@ -16,7 +16,7 @@ const Hero = () => {
         <div className="space-y-8">
           <div className="flex items-center space-x-4 rounded bg-bg-300 p-1 md:w-3/5 shadow shadow-primary-200">
             <div className="rounded bg-primary-200 px-3">
-              <span className="text-xs text-text-100">WHAT'S NEW</span>
+              <span className="text-xs text-text-100">WHAT&apos;S NEW</span>
             </div>
             <p className="text-text-200">
               Launching SlickCI for GitHub Actions
@@ -32,8 +32,8 @@ const Hero = () => {
             </span>
           </p>
           <div className="space-y-3">
-            <div className="flex items-center space-x-4">
-            <Link href='https://github.com/apps/slickci/installations/select_target'  className="rounded-lg bg-primary-100 flex items-center justify-center p-3 gap-2">
+            <div className="flex items-center space-x-2">
+            <Link href='https://github.com/apps/slickci/installations/select_target'  className="rounded-lg bg-primary-100 flex items-center justify-center p-3 gap-2 hover:bg-bg-300">
                   <FaGithub className="inline" size={16} color="white" />
                 <p className="rounded-md text-xs text-text-100">
                   Get Started for Free
@@ -50,7 +50,7 @@ const Hero = () => {
         </div>
         <div>
           <Image
-            src={heroImage}
+            src={heroImage as string}
             alt="github-actions"
             width={500}
             height={500}
@@ -75,13 +75,13 @@ const Hero = () => {
             height={125}
           />
           <Image
-            src={pxm}
+            src={pxm as string}
             alt="github-actions"
             width={75}
             height={75}
           />
           <Image
-            src={veme}
+            src={veme as string}
             alt="github-actions"
             width={100}
             height={100}

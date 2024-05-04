@@ -4,10 +4,15 @@ import { CreatePost } from "~/app/_components/create-post";
 import { api } from "~/trpc/server";
 
 import { FaArrowAltCircleRight } from "react-icons/fa";
+import { client } from "./client";
+import { chain } from "./chain";
+
+import {ConnectEmbed} from 'thirdweb/react'
+import Connect from "./_components/connect-button";
 
 
 export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
+  // const hello = await api.post.hello({ text: "from tRPC" });
 
   return (
     <main className="flex flex-col items-center justify-center bg-primary-200">
@@ -16,7 +21,7 @@ export default async function Home() {
         <h1 className="text-6xl font-medium text-text-100">
           SlickCI makes extremely fast and cheap CIs
         </h1>
-        <Link href='http://localhost:300/for-github-actions' className="flex flex-col bg-primary-100 rounded-lg p-8 md:w-1/2 space-y-8 cursor-pointer hover:bg-bg-300">
+        <Link href='/for-github-actions' className="flex flex-col bg-primary-100 rounded-lg p-8 md:w-1/2 space-y-8 cursor-pointer hover:bg-bg-300">
           <div className="space-y-2">
           <h3 className="text-text-100 text-lg font-semibold">For Github Actions</h3>
           <p className="text-text-200 text-sm">Deploy your CICD workflows on decentralized bare metal services with one click</p>
@@ -26,6 +31,11 @@ export default async function Home() {
           <FaArrowAltCircleRight color="white" size={14} />
           </div>
         </Link>
+        {/* <ConnectEmbed
+        client={client}
+        chain={chain}
+        /> */}
+        <Connect />
         </div>
         {/* <CrudShowcase /> */}
       </div>
@@ -33,18 +43,18 @@ export default async function Home() {
   );
 }
 
-async function CrudShowcase() {
-  const latestPost = await api.post.getLatest();
+// async function CrudShowcase() {
+//   const latestPost = await api.post.getLatest();
 
-  return (
-    <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
+//   return (
+//     <div className="w-full max-w-xs">
+//       {latestPost ? (
+//         <p className="truncate">Your most recent post: {latestPost.name}</p>
+//       ) : (
+//         <p>You have no posts yet.</p>
+//       )}
 
-      <CreatePost />
-    </div>
-  );
-}
+//       <CreatePost />
+//     </div>
+//   );
+// }

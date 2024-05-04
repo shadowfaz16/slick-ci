@@ -1,17 +1,20 @@
 import Link from "next/link";
 import React from "react";
 import { FaGithub } from "react-icons/fa";
+import { IoIosRocket } from "react-icons/io";
 
 const NavBar = () => {
   return (
     <div className="container mx-auto flex w-full items-center justify-between py-4">
       <div className="flex items-center space-x-12">
-        <div className="flex space-x-3">
-          <div className="h-11 w-11 rounded-md bg-primary-100 flex items-center justify-center">
-            <div className="h-8 w-8 rounded-md bg-text-100"></div>
+        <div className="flex space-x-2">
+          <div className="h-10 w-10 rounded-md bg-primary-100 flex items-center justify-center">
+            <div className="h-8 w-8 rounded-md bg-text-100 flex items-center justify-center">
+              <IoIosRocket className="text-primary-200" size={20} />
+            </div>
           </div>
           <div>
-            <h1 className="font-medium text-text-100">Logo</h1>
+            <h1 className="font-medium text-text-100 text-sm">SlickCI</h1>
             <h3 className="text-sm text-text-200">For GitHub Actions</h3>
           </div>
         </div>
@@ -23,8 +26,8 @@ const NavBar = () => {
         </ul>
       </div>
       <div className="flex items-center gap-4">
-        <p className="text-text-200">Log in</p>
-        <Link href='https://github.com/apps/slickci/installations/select_target' className="flex items-center justify-center gap-2 rounded-lg bg-primary-100 p-3">
+        {/* <p className="text-text-200">Log in</p> */}
+        <Link href='https://github.com/apps/slickci/installations/select_target' className="flex items-center justify-center gap-2 rounded-lg bg-primary-100 p-3 hover:bg-bg-300">
           <FaGithub className="inline" size={16} color="white" />
           <p className="rounded-md text-xs text-text-100">
             Get Started for Free

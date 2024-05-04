@@ -33,7 +33,7 @@ export const runner = {
         const commands = workflow.commands
         console.log("Requested CPU: ", workflow.cpu)
         console.log("Requested Memory: ", workflow.memory)
-        for (let command of commands) {
+        for (const command of commands) {
             console.log("Running command now:", command);
             await executeCommand(command)
                 .then(output => console.log('-----Command output-----\n', output))

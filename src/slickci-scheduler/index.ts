@@ -17,7 +17,7 @@ const trpc = createTRPCClient<AppRouter>({
     links: [
         httpBatchLink({
             // url: 'http://localhost:3000',
-            url: 'http://184.105.162.189:3000',
+            url: 'http://184.105.162.190:3000',
         }),
     ],
 });

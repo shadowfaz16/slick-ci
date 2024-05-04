@@ -23,7 +23,7 @@ const Hero = () => {
             </p>
           </div>
           <h1 className="text-6xl font-medium text-text-100 md:w-2/3">
-            Make GitHub Actions Faster
+            Make GitHub Actions Cheaper
           </h1>
           <p className="text-lg text-text-100">
             Managed performance runners for Github Actions.

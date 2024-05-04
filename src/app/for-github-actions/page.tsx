@@ -3,6 +3,7 @@ import Hero from '../_components/home/hero'
 import NavBar from '../_components/navbar'
 import Info from '../_components/home/info'
 import Footer from '../_components/footer'
+import PricingTable from '../_components/home/table'
 
 const Github = () => {
   return (
@@ -10,6 +11,7 @@ const Github = () => {
         <NavBar />
         <Hero />
         <Info />
+        <PricingTable />
         <Footer />
         </div>
   )

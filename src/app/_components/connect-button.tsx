@@ -1,12 +1,24 @@
+'use client';
 import { ConnectButton } from "thirdweb/react";
 import { createWallet, inAppWallet } from "thirdweb/wallets";
 import {client} from '../../app/client'
 import { chain } from "../chain";
+import { useRouter } from "next/navigation";
 
 export default function Connect() {
+    const router = useRouter();
+
+    const redirectToProfile = () => {
+        router.push('/profile')
+    }
+
   return (
     <div>
-      <ConnectButton client={client} connectModal={{
+      <ConnectButton client={client}
+      onConnect={
+      () => redirectToProfile()
+      }
+       connectModal={{
         size: 'compact',
         title: 'Login to SlickCI',
       }}

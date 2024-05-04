@@ -6,6 +6,16 @@ import { useActiveAccount } from "thirdweb/react";
 import { ConnectEmbed } from "thirdweb/react";
 import { client } from "../client";
 import { chain } from "../chain";
+import {GateFiSDK, GateFiDisplayModeEnum} from '@gatefi/js-sdk';
+import {useReadContract} from 'thirdweb/react'
+import {balanceOf} from 'thirdweb/extensions/erc20'
+import {getContract} from 'thirdweb'
+
+// var overlayInstance = new GateFiSDK({
+//   merchantId: "testID",
+//   displayMode: "overlay" as GateFiDisplayModeEnum,
+//   nodeSelector: "#overlay-button"
+// })
 
 const Table = () => {
   return (
@@ -64,6 +74,28 @@ const Table = () => {
 
 const Profile = () => {
   const account = useActiveAccount();
+  // const openOverlay = () => {
+  //   overlayInstance.show();
+  // };
+
+  const SLICK_CONTRACT = getContract({
+    address: '0x165D7c367f70eF96fe4B9b50140Ca456bbECD941',
+    chain: chain,
+    client: client,
+  })
+
+  const {data: slickTokenBalance, isLoading: slickTokenBalanceLoading} = useReadContract(
+    balanceOf,
+    {
+      contract: SLICK_CONTRACT,
+      address: account?.address || '',
+      queryOptions: {
+        enabled: !!account,
+      },
+    }
+  )
+
+  console.log("slickTokenBalance:", slickTokenBalance)
 
   return (
     <div className="min-h-screen bg-bg-100">
@@ -72,6 +104,10 @@ const Profile = () => {
       </div>
       {account ? (
         <div className="container mx-auto py-6">
+            {/* <button id="#overlay-button" onClick={openOverlay} className="rounded-md bg-bg-100 p-2 px-4 text-sm text-text-200 hover:bg-bg-200">
+            Open Overlay
+          </button> */}
+         
           <div className="flex items-center justify-between rounded-lg border border-primary-300 bg-primary-100 p-6">
             <div className="flex gap-2">
               <div>
@@ -96,6 +132,21 @@ const Profile = () => {
               </button>
             </div>
           </div>
+          <div className="flex items-center justify-between pt-6">
+            <div className="flex gap-2">
+              <div>
+                <h3 className="text-lg text-text-100">Account Balance</h3>
+                <p className="text-sm text-text-200">
+                  Your current balance in your account
+                </p>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg text-text-100">
+                {slickTokenBalance ? slickTokenBalance : 'Loading...' }
+              </h3>
+            </div>
+            </div>
           <div className="py-6">
             <h4 className="text-xl text-text-100">Resource Limits</h4>
             <p className="text-sm text-text-200">

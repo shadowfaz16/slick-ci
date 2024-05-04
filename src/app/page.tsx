@@ -18,7 +18,7 @@ export default async function Home() {
       <div className="container flex flex-col justify-center gap-12 px-4 pb-24">
         <div className="space-y-20">
         <h1 className="text-6xl font-medium text-text-100">
-          SlickCI makes extremely fast and cheap CIs
+          SlickCI makes faster and cheaper CIs
         </h1>
         <Link href='/for-github-actions' className="flex flex-col bg-primary-100 rounded-lg p-8 md:w-1/2 space-y-8 cursor-pointer hover:bg-bg-300">
           <div className="space-y-2">
